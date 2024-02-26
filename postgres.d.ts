@@ -11,6 +11,10 @@ interface WhereObject {
     [column: string]: any;
 }
 
+interface InsertStatement extends Statement {
+    returning(columns: string): InsertStatement;
+}
+
 interface UpdateStatement extends Statement {
     values(...values: any[]): UpdateStatement;
     set(...values: any[]): UpdateStatement;
@@ -22,6 +26,7 @@ interface UpdateStatement extends Statement {
 }
 
 interface SqlBricksPostgresFunction extends SqlBricksFn {
+    insert(tbl: string, ...values: any[]): InsertStatement;
     update(tbl: string, ...values: any[]): UpdateStatement;
 }
 
